@@ -4,7 +4,8 @@ export class C4View {
     private key?: string;
     private description?: string;
     private tags?: string;
-    private include:string[] = [];
+    private elements: any[] = [];
+    private animations: any[] = [];
 
     constructor(type: "SystemLandscape" | "SystemContext" | "Container" | "Component", key?: string, description?: string, tags?: string) {
         this.type = type;
@@ -13,8 +14,22 @@ export class C4View {
         this.tags = tags;
     }
 
+    wildcardEntity() {
+        
+    }
+
     includeEntity(id:string) {
-        this.include.push(id);
+        this.elements.push({id});
+    }
+
+    excludeEntity(id:string) {
+        for(let i = 0; i < this.elements.length; i++) {
+            if(this.elements[i].id === id) {
+                this.elements.splice(i, 1);
+                break;
+            }
+        }
+        // this.elements.push({id});
     }
 
     get Type() {
@@ -29,7 +44,11 @@ export class C4View {
         return this.description;
     }
 
-    get Include() {
-        return this.include;
+    get Elements() {
+        return this.elements;
+    }
+
+    get Animations() {
+        return this.animations;
     }
 }

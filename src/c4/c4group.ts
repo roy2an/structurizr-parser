@@ -8,7 +8,7 @@ export class C4Group {
     private name: string;
 
     private people:C4Person[] = [];
-    private softwaresystems:C4SoftwareSystem[] = [];
+    private softwareSystems:C4SoftwareSystem[] = [];
 
     constructor(id:string, name:string ) {
         this.id = id;
@@ -20,7 +20,7 @@ export class C4Group {
     }
 
     addSoftwareSystem(ssys: C4SoftwareSystem) {
-        this.softwaresystems.push(ssys);
+        this.softwareSystems.push(ssys);
     }
 
     get Id(){
@@ -36,7 +36,7 @@ export class C4Group {
     }
 
     get SoftwareSystems() {
-        return this.softwaresystems;
+        return this.softwareSystems;
     }
 
     findElement(e_id: string) : C4Element[] {
@@ -52,7 +52,7 @@ export class C4Group {
         }
 
         // If not, find element in Software Systems
-        for (const element of this.softwaresystems){
+        for (const element of this.softwareSystems){
             let tree = element.findElement(e_id);
             // If found, return tree
             if (tree.length > 0) {

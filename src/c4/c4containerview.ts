@@ -2,16 +2,16 @@ import { C4View } from "./c4view";
 
 export class C4ContainerView extends C4View {
 
-    private containerID: string;
+    private softwareSystemId: string;
     /**
      *
      */
-    constructor(containerId:string, key?: string, description?: string, tags?: string) {
+    constructor(softwareSystemId:string, key?: string, description?: string, tags?: string) {
         super("Container", key, description ,tags);
-        this.containerID = containerId;
+        this.softwareSystemId = softwareSystemId;
     }
 
-    get ContainerId() {
-        return this.containerID;
+    get SoftwareSystemId() {
+        return this.softwareSystemId;
     }
 }

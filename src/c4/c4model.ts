@@ -6,7 +6,7 @@ import { C4SoftwareSystem } from "./c4softwaresystem";
 export class C4Model {
 
     private people:C4Person[] = [];
-    private softwaresystems:C4SoftwareSystem[] = [];
+    private softwareSystems:C4SoftwareSystem[] = [];
     private groups:C4Group[] = [];
 
     constructor() {} 
@@ -20,7 +20,7 @@ export class C4Model {
     }
 
     addSoftwareSystem(ssys: C4SoftwareSystem) {
-        this.softwaresystems.push(ssys);
+        this.softwareSystems.push(ssys);
     }
 
     addRelationship(s_id: string, t_id: string, desc: string, technology?: string, tags?: string){
@@ -48,7 +48,7 @@ export class C4Model {
         }
 
         // If not, find element in root Software Systems
-        for (const element of this.softwaresystems){
+        for (const element of this.softwareSystems){
             let tree = element.findElement(e_id);
             // If found, return tree
             if (tree.length > 0) {
@@ -73,7 +73,7 @@ export class C4Model {
     }
 
     get SoftwareSystems() {
-        return this.softwaresystems;
+        return this.softwareSystems;
     }
 
     get Groups() {

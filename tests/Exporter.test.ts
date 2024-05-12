@@ -3,10 +3,10 @@ import { StructurizrLexer } from '../src/Lexer';
 import { StructurizrParser } from '../src/Parser';
 import { StructurizrInterpreter } from '../src/StructurizrInterpreter'
 import { Workspace } from 'structurizr-typescript';
+import { MermaidExporter } from '../src/exporter/mermaid';
 
-describe('Testing StructurizrInterpreter', () => {
-
-    test('Can interpret getting started dsl', async() => {
+describe('Testing Exporter', () => {
+    test('Can export getting started dsl', async() => {
         var dsl = await fsPromise.readFile('./tests/data/getting-started.dsl', 'utf-8');
         const lexingResult = StructurizrLexer.tokenize(dsl);
         expect(lexingResult.errors.length).toBe(0);
@@ -20,7 +20,7 @@ describe('Testing StructurizrInterpreter', () => {
         expect(wspace.model.softwareSystems.length).toBe(1);
         expect(wspace.model.relationships.length).toBe(3);
         expect(wspace.views.systemContextViews.length).toBe(1);
-        await fsPromise.writeFile("./tests/structurizr/structurizr-getting-started.json", JSON.stringify(wspace.toDto()));
+        await fsPromise.writeFile("./tests/structurizr/structurizr-getting-started.md", new MermaidExporter(wspace).export('SystemContentView'));
     });
 
-});
+})

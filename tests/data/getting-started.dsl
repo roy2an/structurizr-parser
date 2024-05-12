@@ -14,9 +14,14 @@ workspace {
     }
 
     views {
-        systemContext swSystem "SystemContext" {
+        systemContext swSystem "SystemContentView" {
             include *
-            autoLayout
+            autolayout lr
+        }
+
+        container swSystem "ContainerView" {
+            include *
+            autolayout lr
         }
 
         styles {

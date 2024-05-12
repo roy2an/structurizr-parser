@@ -1,5 +1,5 @@
 import { CstParser } from "chevrotain";
-import { Animation, AutoLayout, Background, Color, Colour, Component, Container, ContainerInstance, Deployment, DeploymentEnvironment, DeploymentNode, Description, Dynamic, Element, Equals, FontSize, Group, HexColor, Identifier, Image, Include, Int, LBrace, Model, Opacity, Person, Properties, RBrace, RelatedTo, Relationship, Shape, ShapeEnum, SoftwareSystem, SoftwareSystemInstance, StringLiteral, Styles, SystemContext, SystemLandscape, Title, Url, Value, Views, Wildcard, Word, Workspace, allTokens } from "./Lexer";
+import { Animation, AutoLayout, Background, Color, Colour, Component, Container, ContainerInstance, Deployment, DeploymentEnvironment, DeploymentNode, Description, Dynamic, Element, Equals, FontSize, Group, HexColor, Identifier, Image, Include, Exclude, Int, LBrace, Model, Opacity, Person, Properties, RBrace, RelatedTo, Relationship, Shape, ShapeEnum, SoftwareSystem, SoftwareSystemInstance, StringLiteral, Styles, SystemContext, SystemLandscape, Title, Url, Value, Views, Wildcard, Word, Workspace, allTokens } from "./Lexer";
 
 // This class takes all the tokens identified and parses the DSL according to the rulesets defined by the Structurizr schema
 
@@ -267,6 +267,7 @@ class structurizrParser extends CstParser {
     this.MANY(() => {
       this.OR([
         {ALT: () => {this.SUBRULE(this.includeOptions)}},
+        {ALT: () => {this.SUBRULE(this.excludeOptions)}},
         {ALT: () => {this.SUBRULE(this.autoLayoutOptions)}},
         {ALT: () => {this.SUBRULE(this.animationOptions)}},
         {ALT: () => {this.SUBRULE(this.descriptionOptions)}},
@@ -280,7 +281,23 @@ class structurizrParser extends CstParser {
     this.CONSUME(Include);
     this.OR([
       {ALT: () => {this.CONSUME(Wildcard)}},
-      {ALT: () => {this.CONSUME(Identifier)}}
+      {ALT: () => {
+        this.MANY(() => {
+          this.CONSUME(Identifier)
+        })
+      }}
+    ]);
+  });
+
+  private excludeOptions = this.RULE("excludeOptions", () => {
+    this.CONSUME(Exclude);
+    this.OR([
+      {ALT: () => {this.CONSUME(Wildcard)}},
+      {ALT: () => {
+        this.MANY(() => {
+          this.CONSUME(Identifier)
+        })
+      }}
     ]);
   });
 
@@ -391,6 +408,7 @@ class structurizrParser extends CstParser {
     this.MANY(() => {
       this.OR([
         {ALT: () => {this.SUBRULE(this.includeOptions)}},
+        {ALT: () => {this.SUBRULE(this.excludeOptions)}},
         {ALT: () => {this.SUBRULE(this.animationOptions)}},
         {ALT: () => {this.SUBRULE(this.autoLayoutOptions)}},
         {ALT: () => {this.CONSUME(Description); this.CONSUME3(StringLiteral)}}

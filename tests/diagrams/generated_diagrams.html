@@ -1318,6 +1318,16 @@
                 "definition": [
                   {
                     "type": "NonTerminal",
+                    "name": "excludeOptions",
+                    "idx": 0
+                  }
+                ]
+              },
+              {
+                "type": "Alternative",
+                "definition": [
+                  {
+                    "type": "NonTerminal",
                     "name": "autoLayoutOptions",
                     "idx": 0
                   }
@@ -1398,11 +1408,67 @@
             "type": "Alternative",
             "definition": [
               {
-                "type": "Terminal",
-                "name": "identifier",
-                "label": "identifier",
+                "type": "Repetition",
                 "idx": 0,
-                "pattern": "[a-zA-z][a-zA-z.]*\\_?[0-9]*"
+                "definition": [
+                  {
+                    "type": "Terminal",
+                    "name": "identifier",
+                    "label": "identifier",
+                    "idx": 0,
+                    "pattern": "[a-zA-z][a-zA-z.]*\\_?[0-9]*"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "Rule",
+    "name": "excludeOptions",
+    "orgText": "",
+    "definition": [
+      {
+        "type": "Terminal",
+        "name": "exclude",
+        "label": "exclude",
+        "idx": 0,
+        "pattern": "exclude"
+      },
+      {
+        "type": "Alternation",
+        "idx": 0,
+        "definition": [
+          {
+            "type": "Alternative",
+            "definition": [
+              {
+                "type": "Terminal",
+                "name": "wildcard",
+                "label": "wildcard",
+                "idx": 0,
+                "pattern": "(\\*)"
+              }
+            ]
+          },
+          {
+            "type": "Alternative",
+            "definition": [
+              {
+                "type": "Repetition",
+                "idx": 0,
+                "definition": [
+                  {
+                    "type": "Terminal",
+                    "name": "identifier",
+                    "label": "identifier",
+                    "idx": 0,
+                    "pattern": "[a-zA-z][a-zA-z.]*\\_?[0-9]*"
+                  }
+                ]
               }
             ]
           }
@@ -2004,6 +2070,16 @@
                   {
                     "type": "NonTerminal",
                     "name": "includeOptions",
+                    "idx": 0
+                  }
+                ]
+              },
+              {
+                "type": "Alternative",
+                "definition": [
+                  {
+                    "type": "NonTerminal",
+                    "name": "excludeOptions",
                     "idx": 0
                   }
                 ]

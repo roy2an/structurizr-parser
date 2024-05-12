@@ -225,6 +225,7 @@ class c4Interpreter extends BaseStructurizrVisitor {
     viewOptions(node: any, view: any) {
         this.#debug && console.log('Here we are at viewOptions node:');
         if (node.includeOptions) { for (const inc of node.includeOptions) { this.visit(inc, view); } }
+        if (node.excludeOptions) { for (const inc of node.excludeOptions) { this.visit(inc, view); } }
         if (node.autoLayoutOptions) { this.visit(node.autoLayoutOptions, view); }
         if (node.animationOptions) {}
         if (node.descriptionOptions) {}
@@ -235,7 +236,15 @@ class c4Interpreter extends BaseStructurizrVisitor {
         this.#debug && console.log('Here we are at includeOptions node:');
         if (node.wildcard) {  } // Default is include everything
         if (node.identifier) {
-             view.includeEntity(node.indentifer[0].image);
+            view.includeEntity(node.identifier[0].image);
+        }
+    }
+
+    excludeOptions(node: any, view: any) {
+        this.#debug && console.log('Here we are at includeOptions node:');
+        if (node.wildcard) {  } // Default is include everything
+        if (node.identifier) {
+            view.excludeEntity(node.identifier[0].image);
         }
     }
 
