@@ -14,7 +14,7 @@ workspace {
     }
 
     views {
-        systemContext swSystem "SystemContentView" {
+        systemContext swSystem "SystemContextView" {
             include *
             autolayout lr
         }

@@ -20,7 +20,8 @@ describe('Testing Exporter', () => {
         expect(wspace.model.softwareSystems.length).toBe(1);
         expect(wspace.model.relationships.length).toBe(3);
         expect(wspace.views.systemContextViews.length).toBe(1);
-        await fsPromise.writeFile("./tests/structurizr/structurizr-getting-started.md", new MermaidExporter(wspace).export('SystemContentView'));
+        await fsPromise.writeFile("./tests/structurizr/structurizr-system-context-getting-started.md", new MermaidExporter(wspace).export('SystemContextView'));
+        await fsPromise.writeFile("./tests/structurizr/structurizr-container-getting-started.md", new MermaidExporter(wspace).export('ContainerView'));
     });
 
 })
